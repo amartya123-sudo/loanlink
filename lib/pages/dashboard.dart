@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loanlink/pages/credit_score.dart';
+
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -70,11 +70,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                   TextButton.icon(
                     onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CreditScore()),
-                          (route) => false);
+                      print("Pressed button 2");
                     },
                     style: ButtonStyle(
                       fixedSize:
