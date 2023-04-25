@@ -119,7 +119,7 @@ Widget rapp(BuildContext context,String text,String imageName) {
         height: 100.0,
         child: ListTile(
           title: Text(text),
-          contentPadding: EdgeInsets.fromLTRB(0.0, 20.0, 30.0, 0.0),
+          contentPadding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
           onTap: () {
             print("Hello World");
           },
