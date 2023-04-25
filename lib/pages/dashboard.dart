@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:loanlink/r_widgets/r_widgets.dart';
+import 'package:lottie/lottie.dart';
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
 
@@ -9,176 +9,94 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  String onTap() {
+    return "Hello";
+  }
+  final List<Map<String, dynamic>> _items = List.generate(
+      50,
+          (index) => {
+        "id":index,
+        "title":"Credit Score",
+        "content":
+        "This is the credit Score",
+      });
+
+  TextEditingController _credit = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-        // backgroundColor: Colors.grey[400],
+      // backgroundColor: Colors.redAccent,
 
         appBar: AppBar(
-          title: const Text("Dashboard"),
+          title: Text("Dashboard"),
           centerTitle: false,
           backgroundColor: Colors.purple,
+          leading: Icon(Icons.menu),
+
+
         ),
         body: SafeArea(
-            child: Container(
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/images/loanphoto2.jpg'),
-            fit: BoxFit.fill,
-          )),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(50.0, 200.0, 0, 0),
+          child: Container(
+
+            // decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: AssetImage('assets/images/loanphoto2.jpg'),
+            //       fit: BoxFit.fill,
+            //     )
+            // ),
+            //
+
             child: Column(
               children: <Widget>[
-                Row(children: <Widget>[
-                  TextButton.icon(
-                    onPressed: () {
-                      print("Pressed button 1");
-                    },
-                    style: ButtonStyle(
-                      fixedSize:
-                          MaterialStateProperty.all(const Size(150.0, 70.0)),
-                      // backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          return null; // Defer to the widget's default.
-                        },
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.person_outlined,
-                      color: Colors.purple[800],
-                    ),
-                    label: const Text(
-                      "My profile",
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 20.0,
-                      ),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(100.0,0.0,80.0,0.0),
+                  child: Center(
+
+                      child:Container(
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Lottie.network("https://assets1.lottiefiles.com/packages/lf20_5AVtutzGOk.json"),
+                        ),
+                      )
                   ),
-                  const SizedBox(
-                    width: 20.0,
-                  ),
-                  TextButton.icon(
-                    onPressed: () {
-                      print("Pressed button 2");
-                    },
-                    style: ButtonStyle(
-                      fixedSize:
-                          MaterialStateProperty.all(const Size(150.0, 70.0)),
-                      // backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          return null; // Defer to the widget's default.
-                        },
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.calendar_month_outlined,
-                      color: Colors.purple[800],
-                    ),
-                    label: const Text(
-                      "Calender",
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ]),
-                const SizedBox(
-                  height: 20.0,
                 ),
-                Row(children: <Widget>[
-                  TextButton.icon(
-                    onPressed: () {
-                      print("Pressed button 3");
-                    },
-                    style: ButtonStyle(
-                      fixedSize:
-                          MaterialStateProperty.all(const Size(150.0, 70.0)),
-                      // backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          return null; // Defer to the widget's default.
-                        },
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.settings,
-                      color: Colors.purple[800],
-                    ),
-                    label: const Text(
-                      "Settings",
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 20.0,
-                      ),
-                    ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+
+
+                      rtiles(context, "Profile",'assets/pfp1.jpg'),
+                      SizedBox(width: 10.0,),
+                      rapp(context, "New\nApplication",'assets/plus2.jpg')
+                    ],),
+                ),
+                SizedBox(height:10.0,),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+
+
+                      rtcal(context, "Calender",'assets/calender.jpg'),
+
+                      SizedBox(width: 10.0,),
+                      rtiles(context, "Settings",'assets/settings.jpg'),
+
+
+
+                    ],
+
                   ),
-                  const SizedBox(
-                    width: 20.0,
-                  ),
-                  TextButton.icon(
-                    onPressed: () {
-                      print("Pressed button 4");
-                    },
-                    style: ButtonStyle(
-                      fixedSize:
-                          MaterialStateProperty.all(const Size(150.0, 70.0)),
-                      // backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          if (states.contains(MaterialState.focused) ||
-                              states.contains(MaterialState.pressed)) {
-                            return Colors.blueAccent.withOpacity(0.5);
-                          }
-                          return null; // Defer to the widget's default.
-                        },
-                      ),
-                    ),
-                    icon: Icon(
-                      Icons.logout,
-                      color: Colors.purple[800],
-                    ),
-                    label: const Text(
-                      "Log Out",
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ]),
-              ],
-            ),
+                ),
+                SizedBox(height: 20.0,),
+                // loginBtn(context, " Credit Score", onTap),
+                rtcredit(context, "Credit Score"),
+              ],),
           ),
-        )));
+        )
+    );
+
   }
 }
