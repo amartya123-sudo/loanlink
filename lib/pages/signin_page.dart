@@ -63,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 0),
                 const Text(
-                  "Add your phone number. We'll send you a verification code",
+                  "Add your phone number.\nWe'll send you a verification code",
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black38,
@@ -73,6 +73,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 0),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   cursorColor: Colors.purple,
                   controller: mobile,
                   style: const TextStyle(
@@ -80,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
                     fontWeight: FontWeight.bold,
                   ),
                   inputFormatters: [
-                    LengthLimitingTextInputFormatter(12),
+                    LengthLimitingTextInputFormatter(10),
                   ],
                   onChanged: (value) {
                     setState(() {
