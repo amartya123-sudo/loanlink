@@ -43,14 +43,13 @@ class _DashboardState extends State<Dashboard> {
             //     image: DecorationImage(
             //       image: AssetImage('assets/images/loanphoto2.jpg'),
             //       fit: BoxFit.fill,
-            //     )
             // ),
             //
 
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(100.0,0.0,80.0,0.0),
+                  padding: const EdgeInsets.fromLTRB(80.0,0.0,80.0,0.0),
                   child: Center(
 
                       child:Container(
@@ -69,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
 
                       rtiles(context, "Profile",'assets/pfp1.jpg'),
                       SizedBox(width: 10.0,),
-                      rapp(context, "New\nApplication",'assets/plus2.jpg')
+                      rtiles(context, "New\nApplication",'assets/plus2.jpg')
                     ],),
                 ),
                 SizedBox(height:10.0,),
@@ -79,7 +78,7 @@ class _DashboardState extends State<Dashboard> {
                     children: <Widget>[
 
 
-                      rtcal(context, "Calender",'assets/calender.jpg'),
+                      rtiles(context, "Calender",'assets/calender.jpg'),
 
                       SizedBox(width: 10.0,),
                       rtiles(context, "Settings",'assets/settings.jpg'),

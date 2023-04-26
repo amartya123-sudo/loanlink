@@ -31,18 +31,21 @@ AssetImage riconimage(String imageName) {
 Widget rtiles(BuildContext context,String text,String imageName){
   return Center(
     child: Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: SizedBox(
         width: 160.0,
         height: 100.0,
         child: ListTile(
           title: Text(text),
-          contentPadding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
+          contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
           onTap: (){
-            print("Hello World");
+            if(text=="Calender"){getCalender(context);}
+            else if(text=="Profile"){openProfile();}
+            else if(text=="Settings"){openSettings();}
+            else if(text=="New\nApplication"){newApplication();}
           },
           leading: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(5.0),
             child: CircleAvatar(backgroundImage: riconimage(imageName)),
           ),
           // trailing: Icon(Icons.navigate_next),
@@ -55,19 +58,41 @@ Widget rtiles(BuildContext context,String text,String imageName){
     ),
   );
 }
+
+void newApplication() {
+  print("new application pressed");
+}
+
+void openSettings() {
+  print("open settings pressed");
+}
+
+void openProfile() {
+  print("open profile pressed");
+}
+
+void getCalender(BuildContext context) async{
+  print("calendar pressed");
+  DateTime? date = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1990),
+                lastDate: DateTime(3000)
+            );
+}
 Widget rtcredit(BuildContext context,String text){
   return Center(
     child: Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
 
       child: ListTile(
         title: Text(text),
-        contentPadding: EdgeInsets.fromLTRB(20.0, 6.0, 30.0, 10.0),
+        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         onTap: (){
           print("Hello World");
         },
-        leading: Icon(Icons.credit_card),
-        trailing: Icon(Icons.navigate_next),
+        leading: const Icon(Icons.credit_card),
+        trailing: const Icon(Icons.navigate_next),
         iconColor: Colors.white,
         textColor: Colors.white,
         tileColor: Colors.black,
@@ -75,67 +100,6 @@ Widget rtcredit(BuildContext context,String text){
       ),
     ),
 
-  );
-}
-Widget rtcal(BuildContext context,String text,String imageName){
-  return Center(
-    child: Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-      child: SizedBox(
-        width: 160.0,
-        height: 100.0,
-        child: ListTile(
-          title: Text(text),
-          contentPadding: EdgeInsets.fromLTRB(0.0, 20.0, 20.0, 0.0),
-          onTap: () async {
-            DateTime? date = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1990),
-                lastDate: DateTime(3000)
-            );
-          },
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(backgroundImage: riconimage(imageName)),
-          ),
-          // trailing: Icon(Icons.navigate_next),
-          iconColor: Colors.white,
-          textColor: Colors.white,
-          tileColor: Colors.black,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
-        ),
-      ),
-    ),
-  );
-}
-
-Widget rapp(BuildContext context,String text,String imageName) {
-  return Center(
-    child: Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-      child: SizedBox(
-        width: 160.0,
-        height: 100.0,
-        child: ListTile(
-          title: Text(text),
-          contentPadding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-          onTap: () {
-            print("Hello World");
-          },
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(backgroundImage: riconimage(imageName)),
-          ),
-          // trailing: Icon(Icons.navigate_next),
-          iconColor: Colors.white,
-          textColor: Colors.white,
-          tileColor: Colors.black,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(40.0)),
-        ),
-      ),
-    ),
   );
 }
 
