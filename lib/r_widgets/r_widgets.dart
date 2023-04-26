@@ -24,11 +24,11 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-
 AssetImage riconimage(String imageName) {
   return AssetImage(imageName);
 }
-Widget rtiles(BuildContext context,String text,String imageName){
+
+Widget rtiles(BuildContext context, String text, String imageName) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
@@ -38,11 +38,16 @@ Widget rtiles(BuildContext context,String text,String imageName){
         child: ListTile(
           title: Text(text),
           contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
-          onTap: (){
-            if(text=="Calender"){getCalender(context);}
-            else if(text=="Profile"){openProfile();}
-            else if(text=="Settings"){openSettings();}
-            else if(text=="New\nApplication"){newApplication();}
+          onTap: () {
+            if (text == "Calender") {
+              getCalender(context);
+            } else if (text == "Profile") {
+              openProfile();
+            } else if (text == "Settings") {
+              openSettings();
+            } else if (text == "New\nApplication") {
+              newApplication();
+            }
           },
           leading: Padding(
             padding: const EdgeInsets.all(5.0),
@@ -52,7 +57,8 @@ Widget rtiles(BuildContext context,String text,String imageName){
           iconColor: Colors.white,
           textColor: Colors.white,
           tileColor: Colors.black,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
         ),
       ),
     ),
@@ -71,24 +77,24 @@ void openProfile() {
   print("open profile pressed");
 }
 
-void getCalender(BuildContext context) async{
+void getCalender(BuildContext context) async {
   print("calendar pressed");
   DateTime? date = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1990),
-                lastDate: DateTime(3000)
-            );
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1990),
+      lastDate: DateTime(3000));
 }
-Widget rtcredit(BuildContext context,String text){
+
+Widget rtcredit(BuildContext context, String text) {
   return Center(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-
       child: ListTile(
         title: Text(text),
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        onTap: (){
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        onTap: () {
           print("Hello World");
         },
         leading: const Icon(Icons.credit_card),
@@ -96,60 +102,60 @@ Widget rtcredit(BuildContext context,String text){
         iconColor: Colors.white,
         textColor: Colors.white,
         tileColor: Colors.black,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(90.0)),
       ),
     ),
-
   );
 }
 
 Widget textfield({
-    required String hintText,
-    required IconData icon,
-    required TextInputType inputType,
-    required int maxLines,
-    required TextCapitalization capitalization,
-    required TextEditingController controller,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: TextFormField(
-        cursorColor: Colors.black,
-        controller: controller,
-        keyboardType: inputType,
-        maxLines: maxLines,
-        textCapitalization: capitalization,
-        decoration: InputDecoration(
-          prefixIcon: Container(
-            margin: const EdgeInsets.all(18.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.purple,
-            ),
-            child: Icon(
-              icon,
-              size: 20,
-              color: Colors.white,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
+  required String hintText,
+  required IconData icon,
+  required TextInputType inputType,
+  required int maxLines,
+  required TextCapitalization capitalization,
+  required TextEditingController controller,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: TextFormField(
+      cursorColor: Colors.black,
+      controller: controller,
+      keyboardType: inputType,
+      maxLines: maxLines,
+      textCapitalization: capitalization,
+      decoration: InputDecoration(
+        prefixIcon: Container(
+          margin: const EdgeInsets.all(18.0),
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-            ),
+            color: Colors.purple,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-            ),
+          child: Icon(
+            icon,
+            size: 20,
+            color: Colors.white,
           ),
-          hintText: hintText,
-          alignLabelWithHint: true,
-          border: InputBorder.none,
-          fillColor: Colors.purple.shade50,
-          filled: true,
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        hintText: hintText,
+        alignLabelWithHint: true,
+        border: InputBorder.none,
+        fillColor: Colors.purple.shade50,
+        filled: true,
       ),
-    );
-  }
+    ),
+  );
+}
