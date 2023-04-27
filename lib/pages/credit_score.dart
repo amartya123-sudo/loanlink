@@ -149,7 +149,7 @@ class _CreditScoreState extends State<CreditScore> {
                       width: MediaQuery.of(context).size.width * 0.90,
                       child: CustomButton(
                         text: "Loan Amount Checker",
-                        onPressed:() {storeBankData; getDropdown; print(loanType);},
+                        onPressed:() {storeBankData(); getDropdown(); print(loanType);},
                       ),
                     ),
                   ],

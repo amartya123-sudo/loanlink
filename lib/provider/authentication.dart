@@ -97,6 +97,7 @@ class AuthProvider extends ChangeNotifier {
         await _firebaseFirestore.collection("users").doc(_uid).get();
     if (snapshot.exists) {
       print("User Exists");
+      print(_firebaseAuth.currentUser!.uid);
       return true;
     } else {
       print("New User");
@@ -135,9 +136,11 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     try {
       _bankingModel = bankingModel;
+      User? user = _firebaseAuth.currentUser;
+      String? iden = user?.uid;
       await _firebaseFirestore
           .collection("banking")
-          .doc(_uid)
+          .doc(iden)
           .set(bankingModel.toMap());
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message.toString());
