@@ -1,26 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-
-void getCreditScore2() {
-//Todo: add _phone from login page
-String _phone="639463984s";
-  final FirebaseFirestore db = FirebaseFirestore.instance;
-  // db.collection("users").doc("ll20229876").get().then((value) {print(value);});
-  // db.collection("users").where("phone", isEqualTo: _phone).get().then(
-  db.collection("users").doc("ll20229876").get().then(
-      (querySnapshot) {
-        print("Successfully completed");
-        print('${querySnapshot.get("phoneNumber")}');
-        // for (var docSnapshot in querySnapshos) {
-        //   print('${docSnapshot.id} => ${docSnapshot.data()}');
-        // }
-        
-      },
-      onError: (e) => print("Error completing: $e"),
-    );
-
-}
+final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 String getData(String uid, String coll, String key){
   String value="";
   final FirebaseFirestore db = FirebaseFirestore.instance;
@@ -30,18 +12,24 @@ String getData(String uid, String coll, String key){
   return value;
 }
 
-bool compareCreditScore(String uid, String reqAm) {
+bool compareCreditScore(String reqAm) {
+  String uid = _firebaseAuth.currentUser!.uid;
   double reqAmount = reqAm as double;
   String creditScore = getData(uid, "banking", "creditScore");
   int credit = creditScore as int;
   return (reqAmount<=credit);
 }
 
-double getCreditScore(String inc, String exp, String loanType, String liab)
+double getCreditScore()
 {
+  String uid = _firebaseAuth.currentUser!.uid;
+  String inc = getData(uid, "banking", "income");
+  String exp = getData(uid, "banking", "expense");
+  String loan = getData(uid, "banking", "loanType");
+  String liab = getData(uid, "banking", "liabilities");
   double income = inc as double;
   double expense = exp as double;
-  double loan = loanType as double;
+  double loanType = loan as double;
   double liabilities = liab as double;
 
    

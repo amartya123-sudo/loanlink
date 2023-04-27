@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../pages/credit_score.dart';
+import 'package:loanlink/provider/function.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -65,27 +65,6 @@ Widget rtiles(BuildContext context, String text, String imageName) {
       ),
     ),
   );
-}
-
-void newApplication() {
-  print("new application pressed");
-}
-
-void openSettings() {
-  print("open settings pressed");
-}
-
-void openProfile() {
-  print("open profile pressed");
-}
-
-void getCalender(BuildContext context) async {
-  print("calendar pressed");
-  DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1990),
-      lastDate: DateTime(3000));
 }
 
 Widget rtcredit(BuildContext context, String text) {
