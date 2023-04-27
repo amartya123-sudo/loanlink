@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:loanlink/model/banking_model.dart';
+import 'package:loanlink/provider/authentication.dart';
 import 'package:loanlink/r_widgets/r_widgets.dart';
+import 'package:provider/provider.dart';
 
 class CreditScore extends StatefulWidget {
-  const CreditScore({Key? key}) : super(key: key);
+  const CreditScore({super.key});
 
   @override
   State<CreditScore> createState() => _CreditScoreState();
@@ -14,9 +17,15 @@ String? _selectedValue;
 class _CreditScoreState extends State<CreditScore> {
   final incomeController = TextEditingController();
   final expenseController = TextEditingController();
-  final loanTypeController = TextEditingController();
+  String? loanType;
   final loanController = TextEditingController();
   final liabilityController = TextEditingController();
+
+  void getDropdown(){
+    setState(() {
+      loanType = _selectedValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class _CreditScoreState extends State<CreditScore> {
           child: Column(
             children: [
               Row(
-                children:<Widget>[
+                children: <Widget>[
                   Align(
                     alignment: Alignment.topLeft,
                     child: GestureDetector(
@@ -113,7 +122,7 @@ class _CreditScoreState extends State<CreditScore> {
                         }).toList(),
                         onChanged: (String? value) {
                           setState(() {
-                            _selectedValue = value ?? "";
+                            _selectedValue = value;
                           });
                         },
                       ),
@@ -134,6 +143,15 @@ class _CreditScoreState extends State<CreditScore> {
                       capitalization: TextCapitalization.none,
                       controller: liabilityController,
                     ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: CustomButton(
+                        text: "Loan Amount Checker",
+                        onPressed:() {storeBankData; getDropdown; print(loanType);},
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -141,6 +159,24 @@ class _CreditScoreState extends State<CreditScore> {
           ),
         )),
       ),
+    );
+  }
+
+  void storeBankData() {
+    final ap = Provider.of<AuthProvider>(context,listen: false);
+    BankingModel bankingModel = BankingModel(
+      income: incomeController.text.trim(),
+      expense: expenseController.text.trim(),
+      loanType: loanType,
+      loanAmount: loanController.text.trim(),
+      liabilities: liabilityController.text.trim(),
+    );
+    ap.saveBankData(
+      context: context, 
+      bankingModel: bankingModel,
+      onSave: (){
+        ap.saveBankDataSP().then((value) => null);
+      }
     );
   }
 }

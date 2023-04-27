@@ -1,9 +1,9 @@
 class BankingModel {
-  double  income;//get 3 years income;
-  double  expense;//annualy
-  String loanType;
-  double  loanAmount;
-  double  liabilities;
+  String  income;//get 3 years income;
+  String  expense;//annualy
+  String?  loanType;
+  String  loanAmount;
+  String  liabilities;
 
 
   BankingModel({
@@ -33,7 +33,6 @@ class BankingModel {
       "loanType" : loanType,
       "loanAmount" : loanAmount,
       "liabilities" : liabilities,
-    
     };
   }
 }

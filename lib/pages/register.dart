@@ -123,7 +123,7 @@ class _UserInformationState extends State<UserInformation> {
                           text: "Continue",
                           onPressed: storeData,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -144,25 +144,24 @@ class _UserInformationState extends State<UserInformation> {
       createdAt: "",
       uid: "",
     );
-    if(aadharController.text.isNotEmpty) {
+    if (aadharController.text.isNotEmpty) {
       ap.saveUserData(
-        context: context, 
-        userModel: userModel, 
-        aadhar : aadharController,
-        onSuccess: (){
+        context: context,
+        userModel: userModel,
+        aadhar: aadharController,
+        onSuccess: () {
           ap.saveUserDataSP().then(
-            (value) => ap.setSignIn().then(
-              (value) => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Dashboard(), 
-                  ),
-                  (route) => false),
-              ),
-            
-            );
+                (value) => ap.setSignIn().then(
+                      (value) => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Dashboard(),
+                          ),
+                          (route) => false),
+                    ),
+              );
         },
-        );
+      );
     } else {
       showSnackBar(context, "Please Enter Aadhar Number");
     }

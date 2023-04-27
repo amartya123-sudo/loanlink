@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loanlink/model/banking_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:loanlink/model/user_model.dart';
 import 'package:loanlink/pages/verify_otp.dart';
@@ -18,6 +19,8 @@ class AuthProvider extends ChangeNotifier {
   String get uid => _uid!;
   UserModel? _userModel;
   UserModel get userModel => _userModel!;
+  BankingModel? _bankingModel;
+  BankingModel get bankingModel => _bankingModel!;
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
@@ -123,6 +126,26 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  void saveBankData({
+    required BuildContext context,
+    required BankingModel bankingModel,
+    required Function onSave,
+  }) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      _bankingModel = bankingModel;
+      await _firebaseFirestore
+          .collection("banking")
+          .doc(_uid)
+          .set(bankingModel.toMap());
+    } on FirebaseAuthException catch (e) {
+      showSnackBar(context, e.message.toString());
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   Future getDataFromFirestore() async {
     await _firebaseFirestore
         .collection("users")
@@ -146,6 +169,11 @@ class AuthProvider extends ChangeNotifier {
   Future saveUserDataSP() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     await sp.setString("user_model", jsonEncode(userModel.toMap()));
+  }
+
+  Future saveBankDataSP() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    await sp.setString("banking_model", jsonEncode(bankingModel.toMap()));
   }
 
   Future getDataFromSP() async {
