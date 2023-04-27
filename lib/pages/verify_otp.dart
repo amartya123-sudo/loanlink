@@ -34,23 +34,27 @@ class _VerifyOtpState extends State<VerifyOtp> {
             : Center(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                      const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   child: Column(
                     children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: const Icon(Icons.arrow_back),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Text(
-                        "Verification",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22,
-                        ),
+                      Row(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                              child: const Icon(Icons.arrow_back),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          const Text(
+                            "Verification",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 10),
                       const Text(

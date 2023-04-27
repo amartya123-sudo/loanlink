@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/credit_score.dart';
+
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
@@ -95,7 +97,7 @@ Widget rtcredit(BuildContext context, String text) {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         onTap: () {
-          print("Hello World");
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const CreditScore()), (route) => false);
         },
         leading: const Icon(Icons.credit_card),
         trailing: const Icon(Icons.navigate_next),
