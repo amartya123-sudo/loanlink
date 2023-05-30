@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:loanlink/pages/signin_page.dart';
+import 'package:loanlink/pages/verify_otp.dart';
 import 'package:loanlink/provider/authentication.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: true,
+        // home: VerifyOtp(verificationId: ""),
         home: SignInPage(),
         title: "LoanLink",
       ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loanlink/pages/dashboard.dart';
 import 'package:loanlink/pages/register.dart';
 import 'package:loanlink/provider/authentication.dart';
-// import 'package:loanlink/pages/';
 import 'package:loanlink/utils/util.dart';
 import 'package:loanlink/r_widgets/r_widgets.dart';
 import 'package:pinput/pinput.dart';
@@ -10,7 +9,11 @@ import 'package:provider/provider.dart';
 
 class VerifyOtp extends StatefulWidget {
   final String verificationId;
-  const VerifyOtp({super.key, required this.verificationId});
+  final String phoneNumber;
+
+  const VerifyOtp(
+      {Key? key, required this.verificationId, required this.phoneNumber})
+      : super(key: key);
 
   @override
   State<VerifyOtp> createState() => _VerifyOtpState();
@@ -22,8 +25,29 @@ class _VerifyOtpState extends State<VerifyOtp> {
   @override
   Widget build(BuildContext context) {
     final isLoading =
-        Provider.of<AuthProvider>(context, listen: true).isLoading;
+        Provider.of<AuthProvider>(context, listen: false).isLoading;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'Verification',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: isLoading == true
             ? const Center(
@@ -37,29 +61,9 @@ class _VerifyOtpState extends State<VerifyOtp> {
                       const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                   child: Column(
                     children: [
-                      Row(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: GestureDetector(
-                              onTap: () => Navigator.of(context).pop(),
-                              child: const Icon(Icons.arrow_back),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            "Verification",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Enter the OTP send to your phone number",
-                        style: TextStyle(
+                      Text(
+                        "OTP is successfully sent to ${widget.phoneNumber}",
+                        style: const TextStyle(
                             fontSize: 14,
                             color: Colors.black38,
                             fontWeight: FontWeight.bold),
@@ -94,7 +98,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                         width: MediaQuery.of(context).size.width,
                         height: 50,
                         child: CustomButton(
-                          text: "verify",
+                          text: "Log In or Create Account",
                           onPressed: () {
                             if (otpCode != null) {
                               verifyOtp(context, otpCode!);

@@ -121,7 +121,14 @@ class _UserInformationState extends State<UserInformation> {
                         width: MediaQuery.of(context).size.width * 0.90,
                         child: CustomButton(
                           text: "Continue",
-                          onPressed: storeData,
+                          onPressed: () {
+                            storeData();
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Dashboard()),
+                                (route) => false);
+                          },
                         ),
                       ),
                     ],
@@ -150,16 +157,7 @@ class _UserInformationState extends State<UserInformation> {
         userModel: userModel,
         aadhar: aadharController,
         onSuccess: () {
-          ap.saveUserDataSP().then(
-                (value) => ap.setSignIn().then(
-                      (value) => Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Dashboard(),
-                          ),
-                          (route) => false),
-                    ),
-              );
+          ap.saveUserDataSP().then((value) => ap.setSignIn());
         },
       );
     } else {

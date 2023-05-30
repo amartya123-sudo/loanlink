@@ -21,7 +21,7 @@ class _CreditScoreState extends State<CreditScore> {
   final loanController = TextEditingController();
   final liabilityController = TextEditingController();
 
-  void getDropdown(){
+  void getDropdown() {
     setState(() {
       loanType = _selectedValue;
     });
@@ -41,7 +41,7 @@ class _CreditScoreState extends State<CreditScore> {
                   Align(
                     alignment: Alignment.topLeft,
                     child: GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () => Navigator.pop(context),
                       child: const Icon(Icons.arrow_back),
                     ),
                   ),
@@ -149,7 +149,11 @@ class _CreditScoreState extends State<CreditScore> {
                       width: MediaQuery.of(context).size.width * 0.90,
                       child: CustomButton(
                         text: "Loan Amount Checker",
-                        onPressed:() {storeBankData(); getDropdown(); print(loanType);},
+                        onPressed: () {
+                          storeBankData();
+                          getDropdown();
+                          print(loanType);
+                        },
                       ),
                     ),
                   ],
@@ -163,7 +167,7 @@ class _CreditScoreState extends State<CreditScore> {
   }
 
   void storeBankData() {
-    final ap = Provider.of<AuthProvider>(context,listen: false);
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     BankingModel bankingModel = BankingModel(
       income: incomeController.text.trim(),
       expense: expenseController.text.trim(),
@@ -172,11 +176,10 @@ class _CreditScoreState extends State<CreditScore> {
       liabilities: liabilityController.text.trim(),
     );
     ap.saveBankData(
-      context: context, 
-      bankingModel: bankingModel,
-      onSave: (){
-        ap.saveBankDataSP().then((value) => null);
-      }
-    );
+        context: context,
+        bankingModel: bankingModel,
+        onSave: () {
+          ap.saveBankDataSP().then((value) => null);
+        });
   }
 }

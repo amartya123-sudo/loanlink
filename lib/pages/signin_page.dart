@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:provider/provider.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatefulWidget{
   const SignInPage({Key? key}) : super(key: key);
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignInPage> createState() => SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class SignInPageState extends State<SignInPage> {
   final TextEditingController mobile = TextEditingController();
 
   Country selectedCountry = Country(
@@ -151,7 +151,7 @@ class _SignInPageState extends State<SignInPage> {
                   width: double.infinity,
                   height: 50,
                   child: CustomButton(
-                      text: "Login", onPressed: () => sendPhoneNumber()),
+                      text: "Login", onPressed: () => sendPhoneNumber("+${selectedCountry.phoneCode}${mobile.text.trim()}")),
                 ),
               ],
             ),
@@ -161,9 +161,8 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  void sendPhoneNumber() {
+  void sendPhoneNumber(String phoneNumber) {
     final ap = Provider.of<AuthProvider>(context, listen: false);
-    String phoneNumber = mobile.text.trim();
-    ap.signInVPhone(context, "+${selectedCountry.phoneCode}$phoneNumber");
+    ap.signInVPhone(context, phoneNumber);
   }
 }

@@ -56,7 +56,7 @@ class AuthProvider extends ChangeNotifier {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => VerifyOtp(verificationId: verificationId),
+                builder: (context) => VerifyOtp(verificationId: verificationId, phoneNumber:phoneNumber),
               ),
             );
           },
@@ -172,6 +172,7 @@ class AuthProvider extends ChangeNotifier {
   Future saveUserDataSP() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     await sp.setString("user_model", jsonEncode(userModel.toMap()));
+    notifyListeners();
   }
 
   Future saveBankDataSP() async {

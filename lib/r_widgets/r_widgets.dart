@@ -97,7 +97,8 @@ Widget rtcredit(BuildContext context, String text) {
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         onTap: () {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const CreditScore()), (route) => false);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const CreditScore()));
         },
         leading: const Icon(Icons.credit_card),
         trailing: const Icon(Icons.navigate_next),
@@ -154,6 +155,55 @@ Widget textfield({
         ),
         hintText: hintText,
         alignLabelWithHint: true,
+        border: InputBorder.none,
+        fillColor: Colors.purple.shade50,
+        filled: true,
+      ),
+    ),
+  );
+}
+
+Widget textfieldneo({
+  required bool readOnly,
+  required IconData icon,
+  required int maxLines,
+  required TextCapitalization capitalization,
+  required Function hintText,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: TextFormField(
+      cursorColor: Colors.black,
+      readOnly: readOnly,
+      maxLines: maxLines,
+      textCapitalization: capitalization,
+      decoration: InputDecoration(
+        prefixIcon: Container(
+          margin: const EdgeInsets.all(18.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.purple,
+          ),
+          child: Icon(
+            icon,
+            size: 20,
+            color: Colors.white,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        alignLabelWithHint: true,
+        // hintText: getData(),
         border: InputBorder.none,
         fillColor: Colors.purple.shade50,
         filled: true,
